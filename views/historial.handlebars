@@ -1,0 +1,19 @@
+<h2>Historial</h2>
+
+{{#if nroProductos}}
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+    </tr>
+    {{#each productosHandlebars}}
+    <tr>
+        <td>{{this.title}}</td>
+        <td>{{this.price}}</td>
+    </tr>
+    {{/each}}
+</table>
+{{else}}
+<h3>No se encontraron productos</h3>
+{{/if}}
+<button style="margin: 15px 0"><a href="/">Ingresar producto</a></button>
