@@ -4,7 +4,7 @@ const productosHandlebars = []
 
 const webRouter = express.Router();
 
-webRouter.get('/',(req,res) => {
+webRouter.get('/formulario',(req,res) => {
     res.render('productos', { productosHandlebars })
 })
 
