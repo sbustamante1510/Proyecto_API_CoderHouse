@@ -1,3 +1,5 @@
+const {contenedordeProductos} = require('./contenedorProductos.js');
+const {contenedordeMensajes} = require('./contenedorMensajes.js');
 const express = require('express');
 const {webRouter} = require('./routers/webRouter.js');
 const {routerApi} = require('./routers/routerApi.js');
@@ -42,15 +44,17 @@ io.on('connection',socket => {
 
 
     
-    socket.on('nuevoMensaje',data => {
-        productosListado.push(data)
+    socket.on('nuevoMensaje',async data => {
+        productosListado.push(data);
         io.sockets.emit('mensajesActualizados', productosListado);
+        await contenedordeProductos.guardar(data);
     })
     
-    socket.on('nuevoMensajeChat',data => {
+    socket.on('nuevoMensajeChat',async data => {
         data.fecha = new Date().toLocaleString()
         mensajesChat.push(data)
         io.sockets.emit('mensajesActualizadosChat', mensajesChat);
+        await contenedordeMensajes.guardar(data);
     })
     
 })
