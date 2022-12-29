@@ -1,16 +1,17 @@
-const {contenedordeProductos} = require('./contenedorProductos.js');
-const {contenedordeMensajes} = require('./contenedorMensajes.js');
-const express = require('express');
-const {webRouter} = require('./routers/webRouter.js');
-const {routerApi} = require('./routers/routerApi.js');
-const {engine} = require('express-handlebars');
-const { Server: HttpServer } = require('http')
-const { Server: IOServer } = require('socket.io')
+//const {contenedordeProductos} = require('./contenedorProductos.js');
+//const {contenedordeMensajes} = require('./contenedorMensajes.js');
+import express from 'express';
+// const {webRouter} = require('./routers/webRouter.js');
+// const {routerApi} = require('./routers/routerApi.js');
+import {routerApiTest}  from './routers/routerApiTest.js';
+import {engine} from 'express-handlebars';
+// import { Server: HttpServer } from 'http';
+// import { Server: IOServer } from 'socket.io';
 
 
 const servidor = express();
-const httpServer = new HttpServer(servidor)
-const io = new IOServer(httpServer)
+// const httpServer = new HttpServer(servidor)
+// const io = new IOServer(httpServer)
 
 
 //middleware
@@ -30,42 +31,48 @@ const productosListado = [];
 const mensajesChat = []
 
 //sockets
-io.on('connection',socket => {
-    // socket.emit("mensajesActualizados", mensajes)
+// io.on('connection',socket => {
+//     // socket.emit("mensajesActualizados", mensajes)
 
-    // socket.on('nuevoMensaje', mensaje => {
+//     // socket.on('nuevoMensaje', mensaje => {
 
-    // })
+//     // })
 
-    console.log('Usuario conectado');
+//     console.log('Usuario conectado');
     
-    socket.emit('mensajesActualizados', productosListado);
-    socket.emit('mensajesActualizadosChat', mensajesChat);
+//     socket.emit('mensajesActualizados', productosListado);
+//     socket.emit('mensajesActualizadosChat', mensajesChat);
 
 
     
-    socket.on('nuevoMensaje',async data => {
-        productosListado.push(data);
-        io.sockets.emit('mensajesActualizados', productosListado);
-        await contenedordeProductos.guardar(data);
-    })
+//     socket.on('nuevoMensaje',async data => {
+//         productosListado.push(data);
+//         io.sockets.emit('mensajesActualizados', productosListado);
+//         await contenedordeProductos.guardar(data);
+//     })
     
-    socket.on('nuevoMensajeChat',async data => {
-        data.fecha = new Date().toLocaleString()
-        mensajesChat.push(data)
-        io.sockets.emit('mensajesActualizadosChat', mensajesChat);
-        await contenedordeMensajes.guardar(data);
-    })
+//     socket.on('nuevoMensajeChat',async data => {
+//         data.fecha = new Date().toLocaleString()
+//         mensajesChat.push(data)
+//         io.sockets.emit('mensajesActualizadosChat', mensajesChat);
+//         await contenedordeMensajes.guardar(data);
+//     })
     
-})
+// })
 
 
 
 //rutas
-servidor.use(webRouter);
-servidor.use('/api/productos',routerApi);
+// servidor.use(webRouter);
+// servidor.use('/api/productos',routerApi);
+servidor.use('/api/productos-test',routerApiTest);
 
-const server = httpServer.listen(8080, () => {
+//Sockets necesario
+// const server = httpServer.listen(8080, () => {
+//     console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
+// });
+
+const server = servidor.listen(8080, () => {
     console.log(`Servidor http escuchando en el puerto ${server.address().port}`)
 });
 server.on("error", error => console.log(`Error en servidor ${error}`));
