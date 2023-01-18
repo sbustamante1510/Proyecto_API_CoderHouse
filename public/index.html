@@ -8,11 +8,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <h1>Ingreso de productos</h1>
+    <form action="/api/session/login" method="post" id="formulario_login">
+        <p>Login del usuario</p>
+        <label for="username">Ingrese su nombre</label>
+        <input id="username" type="text"><br>
+        <button type="submit" id="btn_logueo">Enviar</button>
+    </form>
+    <div id="container_view_logueo" action="/api/session/logout" method="get">
+        
+    </div>
+    <h2>Ingreso de productos</h1>
     <form id="IngresoProductos">
         <div>
             <label for="title">Title: </label>

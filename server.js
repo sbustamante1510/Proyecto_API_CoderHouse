@@ -4,6 +4,7 @@ import express from 'express';
 // const {webRouter} = require('./routers/webRouter.js');
 // const {routerApi} = require('./routers/routerApi.js');
 import {routerApiTest}  from './routers/routerApiTest.js';
+import {routerApiSession} from './routers/routerApiSession.js';
 import {engine} from 'express-handlebars';
 // import { Server: HttpServer } from 'http';
 // import { Server: IOServer } from 'socket.io';
@@ -66,6 +67,7 @@ const mensajesChat = []
 // servidor.use(webRouter);
 // servidor.use('/api/productos',routerApi);
 servidor.use('/api/productos-test',routerApiTest);
+servidor.use('/api/session',routerApiSession);
 
 //Sockets necesario
 // const server = httpServer.listen(8080, () => {

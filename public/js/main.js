@@ -1,4 +1,4 @@
-const socket = io();
+// const socket = io();
 
 const botonEnviar = document.getElementById('btn_enviar_productos')
 const btn_enviar_mensajes = document.getElementById('btn_enviar_mensajes')
@@ -6,6 +6,10 @@ const title_input = document.getElementById('title_input');
 const price_input = document.getElementById('price_input');
 const email_input = document.getElementById('email_input');
 const mensaje_chat_input = document.getElementById('mensaje_chat_input');
+const btn_logueo = document.getElementById('btn_logueo');
+const container_view_logueo = document.getElementById('container_view_logueo');
+const formulario_login = document.getElementById('formulario_login');
+const username = document.getElementById('username');
 
 const mostrarProductos = (data) => {
     console.log(data);
@@ -76,12 +80,28 @@ btn_enviar_mensajes.addEventListener('click', e => {
     }
 })
 
-socket.on('mensajesActualizados', data => {
-    mostrarProductos(data);
-})
+// socket.on('mensajesActualizados', data => {
+//     mostrarProductos(data);
+// })
 
-socket.on('mensajesActualizadosChat', data => {
-    mostrarChat(data);
-})
+// socket.on('mensajesActualizadosChat', data => {
+//     mostrarChat(data);
+// })
 
 
+const nuevaSession = () => {
+    formulario_login.style.display = "none";
+
+    console.log("Comprobando");
+
+    let pEncabezado = document.createElement("p");
+    let btn_deslogueo = document.createElement("button")
+
+    pEncabezado.append(`Bienvenido ${username.value}`);
+    btn_deslogueo.append("Deslogueo");
+
+    container_view_logueo.append(pEncabezado,btn_deslogueo);
+}
+
+btn_logueo.addEventListener('click',nuevaSession);
+// btn_logueo.onclick = nuevaSession();
