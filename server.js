@@ -67,7 +67,7 @@ const mensajesChat = []
 // servidor.use(webRouter);
 // servidor.use('/api/productos',routerApi);
 servidor.use('/api/productos-test',routerApiTest);
-servidor.use('/api/session',routerApiSession);
+servidor.use('/api/passport',routerApiSession);
 
 //Sockets necesario
 // const server = httpServer.listen(8080, () => {

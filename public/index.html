@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
-    <form action="/api/session/login" method="post" id="formulario_login">
-        <p>Login del usuario</p>
+    <form action="/api/passport/users" method="post" id="formulario_login">
+        <p>Registro del usuario</p>
         <label for="username">Ingrese su nombre</label>
         <input id="username" type="text"><br>
+        <label for="passwd">Ingrese su contraseña</label>
+        <input id="passwd" type="password"><br>
         <button type="submit" id="btn_logueo">Enviar</button>
     </form>
     <div id="container_view_logueo" action="/api/session/logout" method="get">
