@@ -69,6 +69,16 @@ const mensajesChat = []
 servidor.use('/api/productos-test',routerApiTest);
 servidor.use('/api/passport',routerApiSession);
 
+servidor.get('/info',(req,res) => {
+    res.json({
+        path: process.execPath,
+        process_id : process.pid,
+        carpeta_proyecto : process.cwd(),
+        version_node: process.version,
+        memoria_reservada : process.memoryUsage()
+    })
+})
+
 //Sockets necesario
 // const server = httpServer.listen(8080, () => {
 //     console.log(`Servidor http escuchando en el puerto ${server.address().port}`)

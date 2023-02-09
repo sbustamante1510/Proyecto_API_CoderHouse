@@ -4,6 +4,7 @@ import MongoStore from 'connect-mongo'
 import passport from 'passport'
 import { Strategy as LocalStrategy } from 'passport-local'
 import { randomUUID } from 'crypto'
+import dotenv from 'dotenv'
 
 const routerApiSession = express.Router();
 
@@ -11,13 +12,21 @@ const mongoURL = 'mongodb://localhost/sessiones'
 
 routerApiSession.use(express.json())
 
+dotenv.config();
+
 routerApiSession.use(session({
 
     // store: MongoStore.create({ mongoURL }),
 
-    secret: 'secreto',
-    resave: false,
-    saveUninitialized: false,
+    // secret: 'secreto',
+    // resave: false,
+    // saveUninitialized: false,
+
+    secret: process.env.SECRET,
+    resave: process.env.RESAVE,
+    saveUninitialized: process.env.SAVEUNINITIALIZED,
+
+
     // cookie: {
     //     maxAge: 60000
     // }
