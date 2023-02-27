@@ -1,11 +1,13 @@
 //const {contenedordeProductos} = require('./contenedorProductos.js');
 //const {contenedordeMensajes} = require('./contenedorMensajes.js');
 import express from 'express';
+import compression from 'compression'
 // const {webRouter} = require('./routers/webRouter.js');
 // const {routerApi} = require('./routers/routerApi.js');
 import {routerApiTest}  from './routers/routerApiTest.js';
 import {routerApiSession} from './routers/routerApiSession.js';
 import {engine} from 'express-handlebars';
+import logger from './logger.js';
 // import { Server: HttpServer } from 'http';
 // import { Server: IOServer } from 'socket.io';
 
@@ -69,7 +71,7 @@ const mensajesChat = []
 servidor.use('/api/productos-test',routerApiTest);
 servidor.use('/api/passport',routerApiSession);
 
-servidor.get('/info',(req,res) => {
+servidor.get('/info', compression() ,(req,res) => {
     res.json({
         path: process.execPath,
         process_id : process.pid,
@@ -77,6 +79,11 @@ servidor.get('/info',(req,res) => {
         version_node: process.version,
         memoria_reservada : process.memoryUsage()
     })
+    logger.info(`path ${process.execPath}`);
+    logger.info(`process_id ${process.pid}`);
+    logger.info(`carpeta_proyecto ${process.cwd()}`);
+    logger.info(`version_node ${process.version}`);
+    logger.info(`memoria_reservada ${process.memoryUsage()}`);
 })
 
 //Sockets necesario
